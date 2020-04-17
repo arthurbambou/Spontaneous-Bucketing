@@ -1,11 +1,10 @@
-package fr.arthurbambou.spontaneousbucketing.mixin;
+package io.github.vampirestudios.spontaneousbucketing.mixin;
 
-import fr.arthurbambou.spontaneousbucketing.impl.BucketMaterial;
-import fr.arthurbambou.spontaneousbucketing.impl.BucketRegistry;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketMaterial;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.MilkBucketItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;

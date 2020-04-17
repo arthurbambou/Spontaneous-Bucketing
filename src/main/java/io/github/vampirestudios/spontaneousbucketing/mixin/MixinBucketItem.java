@@ -1,23 +1,17 @@
-package fr.arthurbambou.spontaneousbucketing.mixin;
+package io.github.vampirestudios.spontaneousbucketing.mixin;
 
-import fr.arthurbambou.spontaneousbucketing.impl.BucketMaterial;
-import fr.arthurbambou.spontaneousbucketing.impl.BucketRegistry;
-import net.minecraft.client.gui.screen.TitleScreen;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketMaterial;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BucketItem.class)

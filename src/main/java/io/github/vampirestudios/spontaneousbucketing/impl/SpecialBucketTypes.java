@@ -1,4 +1,4 @@
-package fr.arthurbambou.spontaneousbucketing.impl;
+package io.github.vampirestudios.spontaneousbucketing.impl;
 
 import net.minecraft.util.Identifier;
 

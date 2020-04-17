@@ -1,18 +1,16 @@
-package fr.arthurbambou.spontaneousbucketing.mixin;
+package io.github.vampirestudios.spontaneousbucketing.mixin;
 
-import fr.arthurbambou.spontaneousbucketing.impl.BucketMaterial;
-import fr.arthurbambou.spontaneousbucketing.impl.BucketRegistry;
-import fr.arthurbambou.spontaneousbucketing.impl.SpecialBucketTypes;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketMaterial;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
+import io.github.vampirestudios.spontaneousbucketing.impl.SpecialBucketTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

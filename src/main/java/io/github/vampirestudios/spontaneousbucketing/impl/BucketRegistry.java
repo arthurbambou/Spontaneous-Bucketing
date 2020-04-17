@@ -1,4 +1,4 @@
-package fr.arthurbambou.spontaneousbucketing.impl;
+package io.github.vampirestudios.spontaneousbucketing.impl;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.entity.EntityType;

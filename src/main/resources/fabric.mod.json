@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "fr.arthurbambou.spontaneousbucketing.SpontaneousBucketing"
+      "io.github.vampirestudios.spontaneousbucketing.SpontaneousBucketing"
     ]
   },
   "mixins": [

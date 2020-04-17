@@ -1,6 +1,6 @@
-package fr.arthurbambou.spontaneousbucketing;
+package io.github.vampirestudios.spontaneousbucketing;
 
-import fr.arthurbambou.spontaneousbucketing.impl.BucketRegistry;
+import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
 import net.fabricmc.api.ModInitializer;
 
 public class SpontaneousBucketing implements ModInitializer {
