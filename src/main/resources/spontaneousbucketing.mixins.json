@@ -1,12 +1,15 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "fr.arthurbambou.spontaneousbucketing.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinBucketItem",
+    "MixinCowEntity",
+    "MixinMilkBucketItem"
   ],
   "client": [
-    "ExampleMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
