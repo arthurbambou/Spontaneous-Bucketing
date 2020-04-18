@@ -6,7 +6,8 @@
   "mixins": [
     "MixinBucketItem",
     "MixinCowEntity",
-    "MixinMilkBucketItem"
+    "MixinMilkBucketItem",
+    "MixinFishEntity"
   ],
   "client": [
 
