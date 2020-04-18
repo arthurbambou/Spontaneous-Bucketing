@@ -8,17 +8,15 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Map;
-
 public class BucketDataManager {
 
-    public static int datapack_number;
+    public static int datapack_number = 0;
 
     public static void init() {
-        datapack_number = 0;
         datapack_number++;
         Artifice.registerData(new Identifier("spontaneousbucketing","artifice_datapack_" +datapack_number), serverResourcePackBuilder -> {
             for (BucketMaterial bucketMaterial : BucketRegistry.BUCKETS) {
+                if (bucketMaterial.getID().toString().equals(new Identifier("iron").toString())) continue;
                 Identifier materialItem = Registry.ITEM.getId(bucketMaterial.getMaterial());
                 Identifier bucket = Registry.ITEM.getId(bucketMaterial.getBucketFromType(new Identifier("empty")));
                 serverResourcePackBuilder.addShapedRecipe(bucket, shapedRecipeBuilder -> {

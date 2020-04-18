@@ -14,13 +14,13 @@ import static io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry.
 
 public class BucketTextureManager {
 
-    public static int resource_pack_number;
+    public static int resource_pack_number = 0;
 
     public static void init() {
-        resource_pack_number = 0;
         resource_pack_number++;
         Artifice.registerAssets(new Identifier("spontaneousbucketing","artifice_resourcepack_" +resource_pack_number), clientResourcePackBuilder -> {
             for (BucketMaterial bucketMaterial : BUCKETS) {
+                if (bucketMaterial.getID().toString().equals(new Identifier("iron").toString())) continue;
                 Style style = bucketMaterial.getStyle();
                 String texturesLocation = "item/buckets/" + style.getName() + "/";
                 Identifier bucketTextureLocation = new Identifier(texturesLocation + "empty");
@@ -75,8 +75,9 @@ public class BucketTextureManager {
 
     public static void newBucketType(Identifier type) {
         resource_pack_number++;
-        Artifice.registerAssets(new Identifier("spontaneousbucketing","artifice_resourcepack_" +resource_pack_number), clientResourcePackBuilder -> {
+        Artifice.registerAssets(new Identifier("spontaneousbucketing","artifice_resourcepack_" + resource_pack_number), clientResourcePackBuilder -> {
             for (BucketMaterial material : BUCKETS) {
+                if (material.getID().toString().equals(new Identifier("iron").toString())) continue;
                 Style style = material.getStyle();
                 String texturesLocation = "item/buckets/" + style.getName() + "/";
                 Identifier bucketTextureLocation = new Identifier(texturesLocation + "empty");

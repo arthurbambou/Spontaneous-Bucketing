@@ -65,10 +65,16 @@ public class BucketRegistry {
                 }
             }
         });
-        RegistryEntryAddedCallback.event(Registry.FLUID).register((i, identifier, fluid) -> {
-            if (fluid.isStill(fluid.getDefaultState())) registerBucketType(identifier);
+        RegistryEntryAddedCallback.event(Registry.ITEM).register((i, identifier, item) -> {
+            if (item instanceof BucketItem) {
+                for (Fluid fluid : Registry.FLUID) {
+                    if (Registry.ITEM.getId(fluid.getBucketItem()).toString().equals(identifier.toString()) && fluid.isStill(fluid.getDefaultState())) {
+                        registerBucketType(Registry.FLUID.getId(fluid));
+                        break;
+                    }
+                }
+            }
         });
-        Registry.register(BUCKETS, new Identifier("gold"), new BucketMaterial(new Identifier("gold"), Items.GOLD_INGOT, 0xf5ef42));
     }
 
     public static void registerBucketType(Identifier identifier) {
@@ -76,7 +82,7 @@ public class BucketRegistry {
             BUCKET_TYPES.add(identifier);
             if (Registry.FLUID.containsId(identifier)) {
                 BUCKETS.forEach(bucketMaterial -> {
-                    if (BUCKETS.getId(bucketMaterial) != new Identifier("iron")) {
+                    if (!BUCKETS.getId(bucketMaterial).toString().equals(new Identifier("iron").toString())) {
                         bucketMaterial.addBucketType(identifier, new BucketItem(Registry.FLUID.get(identifier), new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
                     } else {
                         bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());

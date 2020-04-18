@@ -13,6 +13,7 @@ public class BucketColorManager {
 
     public static void init() {
         for (BucketMaterial material : BucketRegistry.BUCKETS) {
+            if (material.getID().toString().equals(new Identifier("iron").toString())) continue;
             int color = material.getColor();
             if (color == -1) continue;
             for (Map.Entry<Identifier, Identifier> entry : material.getEntrySet()) {
@@ -39,6 +40,7 @@ public class BucketColorManager {
 
     public static void newBucketType(Identifier type) {
         for (BucketMaterial material : BucketRegistry.BUCKETS) {
+            if (material.getID().toString().equals(new Identifier("iron").toString())) continue;
             int color = material.getColor();
             if (color != -1) {
                 ColorProviderRegistryImpl.ITEM.register((stack, tintIndex) -> {

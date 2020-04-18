@@ -11,19 +11,19 @@ import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BucketItem.class)
 public class MixinBucketItem {
-	@ModifyVariable(at = @At(value = "INVOKE_ASSIGN"), name = "itemStack2", method = "use")
-	private ItemStack bucketing$getFilledBucket(ItemStack stack) {
-		System.out.println(stack.toString());
-		System.out.println(Registry.ITEM.getId((Item)(Object) this).toString());
-		BucketMaterial material = BucketRegistry.getMaterialFromBucket((Item)(Object) this);
-		BucketMaterial wrongMaterial = BucketRegistry.getMaterialFromBucket(stack.getItem());
-		Identifier bucketType = wrongMaterial.getTypeFromBucket(stack.getItem());
-		return new ItemStack(material.getBucketFromType(bucketType), stack.getCount());
+
+	@ModifyArg(method = "use", at = @At(value = "INVOKE", target = "net/minecraft/item/BucketItem.getFilledStack(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/Item;)Lnet/minecraft/item/ItemStack;"), index = 2)
+	private Item bucketing$getFilledBucket(ItemStack stack, PlayerEntity player, Item filledBucket) {
+		BucketMaterial material = BucketRegistry.getMaterialFromBucket(stack.getItem());
+		BucketMaterial wrongMaterial = BucketRegistry.getMaterialFromBucket(filledBucket);
+		Identifier bucketType = wrongMaterial.getTypeFromBucket(filledBucket);
+		return material.getBucketFromType(bucketType);
 	}
 
 	@Inject(at = @At("RETURN"), method = "getEmptiedStack", cancellable = true)
