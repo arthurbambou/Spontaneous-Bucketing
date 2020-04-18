@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Spontaneous Bucketing",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "",
   "authors": [
-    "CatCore (aka. arthurbambou)"
+    "Vampire Studio's"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "",
+    "sources": "https://github.com/vampire-studios/Spontaneous-Bucketing"
   },
 
   "license": "CC0-1.0",
@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.github.vampirestudios.spontaneousbucketing.SpontaneousBucketing"
+    ],
+    "client": [
+      "io.github.vampirestudios.spontaneousbucketing.SpontaneousBucketingClient"
     ]
   },
   "mixins": [
@@ -30,5 +33,9 @@
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": "1.15.x"
+  },
+
+  "custom": {
+    "modmenu:api": true
   }
 }

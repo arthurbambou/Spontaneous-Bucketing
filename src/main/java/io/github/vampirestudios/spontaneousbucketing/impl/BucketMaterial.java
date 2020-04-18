@@ -1,28 +1,52 @@
 package io.github.vampirestudios.spontaneousbucketing.impl;
 
+import io.github.vampirestudios.spontaneousbucketing.client.styles.Style;
+import io.github.vampirestudios.spontaneousbucketing.client.styles.Styles;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class BucketMaterial {
     private Identifier ID;
     private Item material;
-    private int color = -1;
+    private int color;
+    private Style style;
     private Map<Identifier, Identifier> bucketTypeMap = new HashMap<>();
     private static final Identifier NULL = new Identifier("null");
 
     public BucketMaterial(Identifier ID, Item material) {
-        this.ID = ID;
-        this.material = material;
+        this(ID, material, Styles.VANILLA);
+    }
+
+    public BucketMaterial(Identifier ID, Item material, Style style) {
+        this(ID, material, -1, style);
     }
 
     public BucketMaterial(Identifier ID, Item material, int color) {
+        this(ID, material, color, Styles.VANILLA);
+    }
+
+    public BucketMaterial(Identifier ID, Item material, int color, Style style) {
         this.ID = ID;
         this.material = material;
         this.color = color;
+        this.style = style;
+    }
+
+    public Set<Map.Entry<Identifier, Identifier>> getEntrySet() {
+        return this.bucketTypeMap.entrySet();
+    }
+
+    public Style getStyle() {
+        return style;
+    }
+
+    public int getColor() {
+        return color;
     }
 
     public Identifier getID() {

@@ -1,6 +1,11 @@
 package io.github.vampirestudios.spontaneousbucketing.impl;
 
+import io.github.vampirestudios.spontaneousbucketing.client.BucketColorManager;
+import io.github.vampirestudios.spontaneousbucketing.client.BucketTextureManager;
+import io.github.vampirestudios.spontaneousbucketing.data.BucketDataManager;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -77,6 +82,10 @@ public class BucketRegistry {
                         bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());
                     }
                 });
+                if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+                    BucketTextureManager.newBucketType(identifier);
+                    BucketColorManager.newBucketType(identifier);
+                }
             }
         }
     }
