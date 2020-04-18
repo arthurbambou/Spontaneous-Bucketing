@@ -3,13 +3,10 @@ package io.github.vampirestudios.spontaneousbucketing.mixin;
 import io.github.vampirestudios.spontaneousbucketing.impl.BucketMaterial;
 import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
 import io.github.vampirestudios.spontaneousbucketing.impl.SpecialBucketTypes;
-import net.minecraft.advancement.criterion.Criterions;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.passive.CodEntity;
 import net.minecraft.entity.passive.FishEntity;
-import net.minecraft.entity.passive.PufferfishEntity;
-import net.minecraft.entity.passive.SalmonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
@@ -53,7 +50,7 @@ public abstract class MixinFishEntity extends WaterCreatureEntity {
                 else itemStack2 = new ItemStack(Items.BUCKET);
                 this.copyDataToStack(itemStack2);
                 if (!this.world.isClient) {
-                    Criterions.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemStack2);
+                    Criteria.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemStack2);
                 }
 
                 if (itemStack.isEmpty()) {
