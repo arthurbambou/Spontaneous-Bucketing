@@ -30,17 +30,17 @@ public class BucketRegistry {
         for (Fluid fluid : Registry.FLUID) {
             if (fluid.isStill(null)) {
                 BUCKET_TYPES.add(Registry.FLUID.getId(fluid));
-                iron.addBucketType(Registry.FLUID.getId(fluid), fluid.getBucketItem());
+                iron.setBucketForAType(Registry.FLUID.getId(fluid), fluid.getBucketItem());
             } else if (fluid == Fluids.EMPTY) {
                 BUCKET_TYPES.add(Registry.FLUID.getId(fluid));
-                iron.addBucketType(Registry.FLUID.getId(fluid), Items.BUCKET);
+                iron.setBucketForAType(Registry.FLUID.getId(fluid), Items.BUCKET);
             }
         }
         iron.addBucketType(SpecialBucketTypes.MILK, Items.MILK_BUCKET)
-                .addBucketType(SpecialBucketTypes.PUFFERFISH, Items.PUFFERFISH_BUCKET)
-                .addBucketType(SpecialBucketTypes.SALMON, Items.SALMON_BUCKET)
-                .addBucketType(SpecialBucketTypes.COD, Items.COD_BUCKET)
-                .addBucketType(SpecialBucketTypes.TROPICAL_FISH, Items.TROPICAL_FISH_BUCKET);
+                .setBucketForAType(SpecialBucketTypes.PUFFERFISH, Items.PUFFERFISH_BUCKET)
+                .setBucketForAType(SpecialBucketTypes.SALMON, Items.SALMON_BUCKET)
+                .setBucketForAType(SpecialBucketTypes.COD, Items.COD_BUCKET)
+                .setBucketForAType(SpecialBucketTypes.TROPICAL_FISH, Items.TROPICAL_FISH_BUCKET);
         Registry.register(BUCKETS, iron.getID(), iron);
 
         RegistryEntryAddedCallback.event(BUCKETS).register((i, identifier, bucketMaterial) -> {
@@ -55,7 +55,7 @@ public class BucketRegistry {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.PUFFERFISH, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                 } else if (bucketType == SpecialBucketTypes.TROPICAL_FISH) {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.TROPICAL_FISH, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
-                } else if (Registry.FLUID.containsId(bucketType)) {
+                } else if (Registry.FLUID.getId(Registry.FLUID.get(bucketType)).toString().equals(bucketType.toString())) {
                     bucketMaterial.addBucketType(bucketType, new BucketItem(Registry.FLUID.get(bucketType), new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                 }
             }
@@ -74,7 +74,7 @@ public class BucketRegistry {
                     if (BUCKETS.getId(bucketMaterial) != new Identifier("iron")) {
                         bucketMaterial.addBucketType(identifier, new BucketItem(Registry.FLUID.get(identifier), new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
                     } else {
-                        bucketMaterial.addBucketType(identifier, Registry.FLUID.get(identifier).getBucketItem());
+                        bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());
                     }
                 });
             }

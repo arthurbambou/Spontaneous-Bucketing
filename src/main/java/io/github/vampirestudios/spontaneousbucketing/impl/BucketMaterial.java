@@ -33,12 +33,22 @@ public class BucketMaterial {
         return material;
     }
 
-    public BucketMaterial addBucketType(Identifier identifier, Item bucket) {
-        if (this.ID.getPath() != "iron") Registry.register(Registry.ITEM,
+    public BucketMaterial addBucketType(Identifier type, Item bucket) {
+        if (!hasBeenRegistered(bucket)) Registry.register(Registry.ITEM,
                 new Identifier(this.ID.getNamespace(), this.ID.getPath() + "_" +
-                        identifier.toString().replace("minecraft:","").replace(":","_") + "_bucket"), bucket);
-        this.bucketTypeMap.putIfAbsent(identifier, Registry.ITEM.getId(bucket));
+                        type.toString().replace("minecraft:","").replace(":","_") + "_bucket"), bucket);
+        this.bucketTypeMap.putIfAbsent(type, Registry.ITEM.getId(bucket));
         return this;
+    }
+
+    public BucketMaterial setBucketForAType(Identifier type, Item bucket) {
+        if (this.bucketTypeMap.containsKey(type)) this.bucketTypeMap.replace(type, Registry.ITEM.getId(bucket));
+        else this.bucketTypeMap.put(type, Registry.ITEM.getId(bucket));
+        return this;
+    }
+
+    private static boolean hasBeenRegistered(Item item) {
+        return Registry.ITEM.get(Registry.ITEM.getId(item)) == item;
     }
 
     public boolean containsBucket(Item bucket) {
