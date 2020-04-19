@@ -41,7 +41,7 @@ public class BucketRegistry {
                 iron.setBucketForAType(Registry.FLUID.getId(fluid), Items.BUCKET);
             }
         }
-        iron.addBucketType(SpecialBucketTypes.MILK, Items.MILK_BUCKET)
+        iron.setBucketForAType(SpecialBucketTypes.MILK, Items.MILK_BUCKET)
                 .setBucketForAType(SpecialBucketTypes.PUFFERFISH, Items.PUFFERFISH_BUCKET)
                 .setBucketForAType(SpecialBucketTypes.SALMON, Items.SALMON_BUCKET)
                 .setBucketForAType(SpecialBucketTypes.COD, Items.COD_BUCKET)
