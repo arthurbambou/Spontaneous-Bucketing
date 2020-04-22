@@ -1,0 +1,9 @@
+{
+  "item.spontaneous_bucketing.bucket.empty": "Seau en %s",
+  "item.spontaneous_bucketing.bucket.full.liquid": "Seau de %2$s en %1$s",
+  "item.spontaneous_bucketing.bucket.full.fish": "%2$s dans un seau en %1$s",
+
+  "item.minecraft.bucket.iron": "fer",
+
+  "bucket_type.minecraft.milk": "lait"
+}
