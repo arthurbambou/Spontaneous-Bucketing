@@ -6,6 +6,7 @@ import io.github.vampirestudios.spontaneousbucketing.data.BucketDataManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -54,14 +55,23 @@ public class BucketRegistry {
                     bucketMaterial.addBucketType(bucketType, new MilkBucketItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                 } else if (bucketType == SpecialBucketTypes.COD) {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.COD, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
+                    DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                 } else if (bucketType == SpecialBucketTypes.SALMON) {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.SALMON, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
+                    DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                 } else if (bucketType == SpecialBucketTypes.PUFFERFISH) {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.PUFFERFISH, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
+                    DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                 } else if (bucketType == SpecialBucketTypes.TROPICAL_FISH) {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.TROPICAL_FISH, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
+                    DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                 } else if (Registry.FLUID.getId(Registry.FLUID.get(bucketType)).toString().equals(bucketType.toString())) {
                     bucketMaterial.addBucketType(bucketType, new BucketItem(Registry.FLUID.get(bucketType), new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
+                    if (Registry.FLUID.get(bucketType) == Fluids.EMPTY) {
+                        DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.FILL);
+                    } else {
+                        DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
+                    }
                 }
             }
         });
@@ -75,6 +85,7 @@ public class BucketRegistry {
                 }
             }
         });
+        Registry.register(BUCKETS, new Identifier("gold"), new BucketMaterial(new Identifier("gold"), Items.GOLD_INGOT, 0xf5ef42));
     }
 
     public static void registerBucketType(Identifier identifier) {
@@ -84,6 +95,7 @@ public class BucketRegistry {
                 BUCKETS.forEach(bucketMaterial -> {
                     if (!BUCKETS.getId(bucketMaterial).toString().equals(new Identifier("iron").toString())) {
                         bucketMaterial.addBucketType(identifier, new BucketItem(Registry.FLUID.get(identifier), new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
+                        DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(identifier), CustomDispenserBehaviors.EMPTY);
                     } else {
                         bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());
                     }
