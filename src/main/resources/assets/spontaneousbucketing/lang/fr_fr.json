@@ -1,12 +1,9 @@
 {
   "item.spontaneous_bucketing.bucket.empty": "Seau en %s",
-  "item.spontaneous_bucketing.bucket.full": "Seau de %2$s en %1$s",
+  "item.spontaneous_bucketing.bucket.full.liquid": "Seau de %2$s en %1$s",
+  "item.spontaneous_bucketing.bucket.full.fish": "%2$s dans un seau en %1$s",
 
   "item.minecraft.bucket.iron": "fer",
 
-  "bucket_type.minecraft.milk": "lait",
-  "bucket_type.minecraft.pufferfish": "poisson-globe",
-  "bucket_type.minecraft.salmon": "saumon",
-  "bucket_type.minecraft.cod": "morue",
-  "bucket_type.minecraft.tropical_fish": "poisson tropical"
+  "bucket_type.minecraft.milk": "lait"
 }
