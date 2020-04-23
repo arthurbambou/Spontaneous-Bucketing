@@ -66,10 +66,11 @@ public class BucketRegistry {
                     bucketMaterial.addBucketType(bucketType, new FishBucketItem(EntityType.TROPICAL_FISH, Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                     DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                 } else if (Registry.FLUID.getId(Registry.FLUID.get(bucketType)).toString().equals(bucketType.toString())) {
-                    bucketMaterial.addBucketType(bucketType, new BucketItem(Registry.FLUID.get(bucketType), new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                     if (Registry.FLUID.get(bucketType) == Fluids.EMPTY) {
+                        bucketMaterial.addBucketType(bucketType, new BucketItem(Registry.FLUID.get(bucketType), new Item.Settings().maxCount(16).group(ItemGroup.MISC)));
                         DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.FILL);
                     } else {
+                        bucketMaterial.addBucketType(bucketType, new BucketItem(Registry.FLUID.get(bucketType), new Item.Settings().maxCount(1).group(ItemGroup.MISC)));
                         DispenserBlock.registerBehavior(bucketMaterial.getBucketFromType(bucketType), CustomDispenserBehaviors.EMPTY);
                     }
                 }
