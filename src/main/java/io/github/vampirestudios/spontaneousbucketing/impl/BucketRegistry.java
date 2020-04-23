@@ -116,6 +116,14 @@ public class BucketRegistry {
         return BUCKETS.get(new Identifier("iron"));
     }
 
+    public static Identifier getTypeFromBucket(Item bucket) {
+        for (BucketMaterial bucketMaterial : BUCKETS) {
+            if (bucketMaterial.containsBucket(bucket)) return bucketMaterial.getTypeFromBucket(bucket);
+        }
+        System.out.println("Oof");
+        return new Identifier("empty");
+    }
+
     private static <T> DefaultedRegistry<T> createRegistry(String string, String string2, Supplier<T> defaultEntry) {
         return (DefaultedRegistry)putDefaultEntry(string, new DefaultedRegistry(string2), defaultEntry);
     }

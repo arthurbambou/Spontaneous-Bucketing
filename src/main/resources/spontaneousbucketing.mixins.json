@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "io.github.vampirestudios.spontaneousbucketing.mixin",
+  "plugin": "io.github.vampirestudios.spontaneousbucketing.hooks.SpontaneousBucketingMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinBucketItem",
@@ -9,7 +10,8 @@
     "MixinMilkBucketItem",
     "MixinFishEntity",
     "MixinItem",
-    "MixinFishBucketItem"
+    "MixinFishBucketItem",
+    "MixinCauldronBlock"
   ],
   "client": [
 
