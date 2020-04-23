@@ -21,7 +21,7 @@ public class MixinCowEntity {
     @ModifyVariable(method = "interactMob", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/player/PlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"), ordinal = 0, name = "itemStack")
     public ItemStack interactMob$bucketing$replaceItemStack(ItemStack stack) {
         if (stack.getItem() instanceof BucketItem || stack.getItem() instanceof MilkBucketItem) {
-            this.interactMobItemStack = stack.copy();
+            this.interactMobItemStack = stack;
             return new ItemStack(BucketRegistry.BUCKETS.get(new Identifier("iron")).getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())), stack.getCount());
         }
         return stack;
@@ -30,12 +30,14 @@ public class MixinCowEntity {
     @ModifyArg(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setStackInHand(Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"), index = 1)
     private ItemStack interactMob$bucketing$setStackInHand(ItemStack stack) {
         BucketMaterial material = BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem());
+        this.interactMobItemStack.decrement(1);
         return new ItemStack(material.getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())));
     }
 
     @ModifyArg(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;insertStack(Lnet/minecraft/item/ItemStack;)Z"), index = 0)
     private ItemStack interactMob$bucketing$insertStack(ItemStack stack) {
         BucketMaterial material = BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem());
+        this.interactMobItemStack.decrement(1);
         return new ItemStack(material.getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())));
     }
 
