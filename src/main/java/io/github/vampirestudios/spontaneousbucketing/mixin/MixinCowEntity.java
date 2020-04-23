@@ -2,45 +2,46 @@ package io.github.vampirestudios.spontaneousbucketing.mixin;
 
 import io.github.vampirestudios.spontaneousbucketing.impl.BucketMaterial;
 import io.github.vampirestudios.spontaneousbucketing.impl.BucketRegistry;
-import io.github.vampirestudios.spontaneousbucketing.impl.SpecialBucketTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.item.MilkBucketItem;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(CowEntity.class)
-public abstract class MixinCowEntity extends AnimalEntity {
+public class MixinCowEntity {
 
-    protected MixinCowEntity(EntityType<? extends AnimalEntity> type, World world) {
-        super(type, world);
+    private ItemStack interactMobItemStack;
+
+
+    @ModifyVariable(method = "interactMob", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/player/PlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"), ordinal = 0, name = "itemStack")
+    public ItemStack interactMob$bucketing$replaceItemStack(ItemStack stack) {
+        if (stack.getItem() instanceof BucketItem || stack.getItem() instanceof MilkBucketItem) {
+            this.interactMobItemStack = stack.copy();
+            return new ItemStack(BucketRegistry.BUCKETS.get(new Identifier("iron")).getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())), stack.getCount());
+        }
+        return stack;
     }
 
-    /**
-     * @author TODO: Find another way to do this.
-     */
-    @Overwrite
-    public boolean interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() instanceof BucketItem && !player.abilities.creativeMode && !((CowEntity)(Object)this).isBaby()) {
-            BucketMaterial bucketMaterial = BucketRegistry.getMaterialFromBucket(itemStack.getItem());
-            player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-            itemStack.decrement(1);
-            if (itemStack.isEmpty()) {
-                player.setStackInHand(hand, new ItemStack(bucketMaterial.getBucketFromType(SpecialBucketTypes.MILK)));
-            } else if (!player.inventory.insertStack(new ItemStack(bucketMaterial.getBucketFromType(SpecialBucketTypes.MILK)))) {
-                player.dropItem(new ItemStack(bucketMaterial.getBucketFromType(SpecialBucketTypes.MILK)), false);
-            }
+    @ModifyArg(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setStackInHand(Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"), index = 1)
+    private ItemStack interactMob$bucketing$setStackInHand(ItemStack stack) {
+        BucketMaterial material = BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem());
+        return new ItemStack(material.getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())));
+    }
 
-            return true;
-        } else {
-            return super.interactMob(player, hand);
-        }
+    @ModifyArg(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;insertStack(Lnet/minecraft/item/ItemStack;)Z"), index = 0)
+    private ItemStack interactMob$bucketing$insertStack(ItemStack stack) {
+        BucketMaterial material = BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem());
+        return new ItemStack(material.getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())));
+    }
+
+    @ModifyArg(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;dropItem(Lnet/minecraft/item/ItemStack;Z)Lnet/minecraft/entity/ItemEntity;"), index = 0)
+    private ItemStack interactMob$bucketing$dropStack(ItemStack stack) {
+        BucketMaterial material = BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem());
+        return new ItemStack(material.getBucketFromType(BucketRegistry.getTypeFromBucket(stack.getItem())));
     }
 }
