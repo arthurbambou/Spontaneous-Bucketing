@@ -86,7 +86,7 @@ public class BucketRegistry {
                 }
             }
         });
-        Registry.register(BUCKETS, new Identifier("gold"), new BucketMaterial(new Identifier("gold"), Items.GOLD_INGOT, 0xf5ef42));
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) Registry.register(BUCKETS, new Identifier("gold"), new BucketMaterial(new Identifier("gold"), Items.GOLD_INGOT, 0xf5ef42));
     }
 
     public static void registerBucketType(Identifier identifier) {
