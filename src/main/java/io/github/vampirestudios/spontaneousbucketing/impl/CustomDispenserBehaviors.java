@@ -8,7 +8,7 @@ import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.BaseFluid;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -51,7 +51,7 @@ public class CustomDispenserBehaviors {
             Block block = blockState.getBlock();
             if (block instanceof FluidDrainable) {
                 Fluid fluid = ((FluidDrainable)block).tryDrainFluid(iWorld, blockPos, blockState);
-                if (!(fluid instanceof BaseFluid)) {
+                if (!(fluid instanceof FlowableFluid)) {
                     return super.dispenseSilently(pointer, stack);
                 } else {
                     Item item2 = bucketMaterial.getBucketFromType(BucketRegistry.BUCKETS.get(new Identifier("iron")).getTypeFromBucket(fluid.getBucketItem()));
