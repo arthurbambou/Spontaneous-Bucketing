@@ -7,7 +7,6 @@ import net.fabricmc.api.ClientModInitializer;
 public class SpontaneousBucketingClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BucketTextureManager.init();
         BucketColorManager.init();
     }
 }

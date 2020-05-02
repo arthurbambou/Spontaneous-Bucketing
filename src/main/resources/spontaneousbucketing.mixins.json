@@ -6,15 +6,15 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinBucketItem",
+    "MixinCauldronBlock",
     "MixinCowEntity",
-    "MixinMilkBucketItem",
+    "MixinFishBucketItem",
     "MixinFishEntity",
     "MixinItem",
-    "MixinFishBucketItem",
-    "MixinCauldronBlock"
+    "MixinMilkBucketItem"
   ],
   "client": [
-
+    "MixinTutorialManager"
   ],
   "injectors": {
     "defaultRequire": 1

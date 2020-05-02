@@ -102,7 +102,6 @@ public class BucketRegistry {
                     }
                 });
                 if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-                    BucketTextureManager.newBucketType(identifier);
                     BucketColorManager.newBucketType(identifier);
                 }
             }
