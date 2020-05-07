@@ -11,7 +11,8 @@
     "MixinFishBucketItem",
     "MixinFishEntity",
     "MixinItem",
-    "MixinMilkBucketItem"
+    "MixinMilkBucketItem",
+    "MixinMinecraftServer"
   ],
   "client": [
     "MixinTutorialManager"

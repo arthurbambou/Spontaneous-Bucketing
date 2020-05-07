@@ -101,9 +101,6 @@ public class BucketRegistry {
                         bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());
                     }
                 });
-                if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-                    BucketColorManager.newBucketType(identifier);
-                }
             }
         }
     }

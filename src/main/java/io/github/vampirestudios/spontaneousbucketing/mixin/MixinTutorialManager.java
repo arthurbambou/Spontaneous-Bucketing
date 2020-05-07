@@ -1,5 +1,6 @@
 package io.github.vampirestudios.spontaneousbucketing.mixin;
 
+import io.github.vampirestudios.spontaneousbucketing.client.BucketColorManager;
 import io.github.vampirestudios.spontaneousbucketing.client.BucketTextureManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
@@ -17,5 +18,6 @@ public class MixinTutorialManager {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void beforeResourcePackLoad(MinecraftClient minecraftClient, CallbackInfo ci) {
         BucketTextureManager.init();
+        BucketColorManager.init();
     }
 }

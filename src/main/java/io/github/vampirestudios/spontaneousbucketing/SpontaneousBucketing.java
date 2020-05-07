@@ -16,6 +16,5 @@ public class SpontaneousBucketing implements PreLaunchEntrypoint {
 	public void onPreLaunch() {
 		Styles.init();
 		BucketRegistry.init();
-		BucketDataManager.init();
 	}
 }
