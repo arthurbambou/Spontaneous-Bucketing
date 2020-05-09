@@ -15,7 +15,7 @@
     "MixinMinecraftServer"
   ],
   "client": [
-    "MixinTutorialManager"
+    "MixinGameOptions"
   ],
   "injectors": {
     "defaultRequire": 1
