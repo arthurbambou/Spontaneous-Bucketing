@@ -66,9 +66,27 @@ public class BucketMaterial {
     }
 
     public BucketMaterial setBucketForAType(Identifier type, Item bucket) {
-        if (this.bucketTypeMap.containsKey(type)) this.bucketTypeMap.replace(type, Registry.ITEM.getId(bucket));
-        else this.bucketTypeMap.put(type, Registry.ITEM.getId(bucket));
+        if (this.bucketTypeMap.containsKey(type)) {
+            if (Registry.ITEM.getId(bucket).toString().equals(new Identifier("air").toString())) {
+                Registry.ITEM.set(Registry.ITEM.getRawId(Registry.ITEM.get(this.bucketTypeMap.get(type))),
+                        new Identifier(this.ID.getNamespace(), this.ID.getPath() + "_" +
+                        type.toString().replace("minecraft:","").replace(":","_") + "_bucket"), bucket);
+            } else {
+                Registry.ITEM.set(Registry.ITEM.getRawId(Registry.ITEM.get(this.bucketTypeMap.get(type))),
+                        new Identifier(this.ID.getNamespace(), this.ID.getPath() + "_" +
+                                type.toString().replace("minecraft:","").replace(":","_") + "_bucket"), null);
+            }
+            this.bucketTypeMap.replace(type, Registry.ITEM.getId(bucket));
+        } else this.bucketTypeMap.put(type, Registry.ITEM.getId(bucket));
         return this;
+    }
+
+    public BucketMaterial setBucketForAType(BucketType bucketType) {
+        return this.setBucketForAType(bucketType, bucketType.createItem());
+    }
+
+    public BucketMaterial setBucketForAType(BucketType bucketType, Item bucket) {
+        return this.setBucketForAType(bucketType.getId(), bucket);
     }
 
     private static boolean hasBeenRegistered(Item item) {
@@ -76,14 +94,18 @@ public class BucketMaterial {
     }
 
     public boolean containsBucket(Item bucket) {
-        return getTypeFromBucket(bucket) != NULL;
+        return getITypeFromBucket(bucket) != NULL;
     }
 
     public Item getBucketFromType(Identifier identifier) {
         return Registry.ITEM.get(this.bucketTypeMap.get(identifier));
     }
 
-    public Identifier getTypeFromBucket(Item bucket) {
+    public Item getBucketFromType(BucketType bucketType) {
+        return this.getBucketFromType(bucketType.getId());
+    }
+
+    public Identifier getITypeFromBucket(Item bucket) {
         for (Map.Entry<Identifier, Identifier> entry : this.bucketTypeMap.entrySet()) {
             if (entry.getValue().toString().equals(Registry.ITEM.getId(bucket).toString())) return entry.getKey();
         }

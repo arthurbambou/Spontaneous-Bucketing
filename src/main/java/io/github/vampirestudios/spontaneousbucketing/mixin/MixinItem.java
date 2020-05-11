@@ -22,7 +22,7 @@ public class MixinItem {
         if (stack.getItem() instanceof BucketItem || stack.getItem() instanceof MilkBucketItem) {
             BucketMaterial material = BucketRegistry.getMaterialFromBucket(stack.getItem());
             Text materialText = new TranslatableText("item." + material.getID().getNamespace() + ".bucket." + material.getID().getPath());
-            Identifier bucketType = material.getTypeFromBucket(stack.getItem());
+            Identifier bucketType = material.getITypeFromBucket(stack.getItem());
             if (bucketType.toString().equals(new Identifier("empty").toString())) {
                 cir.setReturnValue(new TranslatableText("item.spontaneous_bucketing.bucket.empty", materialText));
             } else if (Registry.FLUID.getId(Registry.FLUID.get(bucketType)).toString().equals(bucketType.toString())) {

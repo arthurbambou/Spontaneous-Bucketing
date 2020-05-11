@@ -54,7 +54,7 @@ public class CustomDispenserBehaviors {
                 if (!(fluid instanceof FlowableFluid)) {
                     return super.dispenseSilently(pointer, stack);
                 } else {
-                    Item item2 = bucketMaterial.getBucketFromType(BucketRegistry.BUCKETS.get(new Identifier("iron")).getTypeFromBucket(fluid.getBucketItem()));
+                    Item item2 = bucketMaterial.getBucketFromType(BucketRegistry.BUCKETS.get(new Identifier("iron")).getITypeFromBucket(fluid.getBucketItem()));
                     stack.decrement(1);
                     if (stack.isEmpty()) {
                         return new ItemStack(item2);

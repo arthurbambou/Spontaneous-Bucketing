@@ -7,12 +7,10 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BucketItem.class)
@@ -22,7 +20,7 @@ public class MixinBucketItem {
 	private Item bucketing$getFilledBucket(ItemStack stack, PlayerEntity player, Item filledBucket) {
 		BucketMaterial material = BucketRegistry.getMaterialFromBucket(stack.getItem());
 		BucketMaterial wrongMaterial = BucketRegistry.getMaterialFromBucket(filledBucket);
-		Identifier bucketType = wrongMaterial.getTypeFromBucket(filledBucket);
+		Identifier bucketType = wrongMaterial.getITypeFromBucket(filledBucket);
 		return material.getBucketFromType(bucketType);
 	}
 
