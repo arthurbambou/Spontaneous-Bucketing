@@ -17,7 +17,6 @@ public class BucketTextureManager {
     public static void init() {
         Artifice.registerAssets(new Identifier("spontaneousbucketing","artifice_resourcepack"), clientResourcePackBuilder -> {
             for (BucketMaterial bucketMaterial : BUCKETS) {
-                if (bucketMaterial.getID().toString().equals(new Identifier("iron").toString())) continue;
                 Style style = bucketMaterial.getStyle();
                 String texturesLocation = "item/buckets/" + style.getName() + "/";
                 Identifier bucketTextureLocation = new Identifier(texturesLocation + "empty");

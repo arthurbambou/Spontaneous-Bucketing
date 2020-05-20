@@ -1,9 +1,9 @@
 plugins {
-	id 'fabric-loom' version '0.4.3'
+	id 'fabric-loom' version '0.2.7-SNAPSHOT'
 	id 'maven-publish'
 	id "co.riiid.gradle" version "0.4.2"
 	id "com.matthewprenger.cursegradle" version "1.4.0"
-	id "com.wynprice.cursemaven" version "2.1.1"
+	id "com.wynprice.cursemaven" version "2.1.4"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -34,7 +34,7 @@ dependencies {
 	modImplementation "com.github.oliviathevampire:artifice:${project.artifice_version}"
 	include "com.github.oliviathevampire:artifice:${project.artifice_version}"
 
-//	modImplementation "curse.maven:honeymod:2924927"
+//	modCompile "curse.maven:honeymod:2960597"
 
 //	modImplementation "io.github.cottonmc.cotton:cotton:${project.cotton_version}"
 }

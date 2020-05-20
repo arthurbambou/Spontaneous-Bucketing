@@ -18,8 +18,8 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class CustomDispenserBehaviors {
 
@@ -45,7 +45,7 @@ public class CustomDispenserBehaviors {
 
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
             BucketMaterial bucketMaterial = BucketRegistry.getMaterialFromBucket(stack.getItem());
-            IWorld iWorld = pointer.getWorld();
+            WorldAccess iWorld = pointer.getWorld();
             BlockPos blockPos = pointer.getBlockPos().offset((Direction)pointer.getBlockState().get(DispenserBlock.FACING));
             BlockState blockState = iWorld.getBlockState(blockPos);
             Block block = blockState.getBlock();

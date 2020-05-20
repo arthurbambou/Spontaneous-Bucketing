@@ -44,7 +44,7 @@ public abstract class MixinFishEntity extends WaterCreatureEntity {
         return stack;
     }
 
-    @ModifyVariable(method = "interactMob", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/passive/FishEntity;getFishBucketItem()Lnet/minecraft/item/ItemStack;"), name = "itemStack2")
+    @ModifyVariable(method = "interactMob", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/passive/FishEntity;getFishBucketItem()Lnet/minecraft/item/ItemStack;"), ordinal = 1, name = "itemStack2")
     public ItemStack interactMob$bucketing$replaceItemStack2(ItemStack stack) {
         BucketMaterial bucketMaterial = BucketRegistry.BUCKETS.get(BucketRegistry.BUCKETS.getId(BucketRegistry.getMaterialFromBucket(this.interactMobItemStack.getItem())));
         this.interactMobItemStack.decrement(1);

@@ -55,7 +55,6 @@ public class BucketRegistry {
                 iron.setBucketForAType(Registry.FLUID.getId(fluid), Items.BUCKET);
             }
         }
-        iron.addBucketType(new Identifier("empty"), BUCKET_TYPES.get(new Identifier("empty")).createItem());
         iron.setBucketForAType(SpecialBucketTypes.MILK, Items.MILK_BUCKET)
                 .setBucketForAType(SpecialBucketTypes.PUFFERFISH, Items.PUFFERFISH_BUCKET)
                 .setBucketForAType(SpecialBucketTypes.SALMON, Items.SALMON_BUCKET)
@@ -90,7 +89,8 @@ public class BucketRegistry {
                                     bucketMaterial.addBucketType(new Identifier(bucketType.getIdentifier()), bucketType.createItem());
                                     bucketType.dispenseBehavior(bucketMaterial);
                                 } else {
-                                    bucketMaterial.setBucketForAType(identifier, Registry.FLUID.get(identifier).getBucketItem());
+                                    System.out.println("Iron");
+                                    bucketMaterial.setBucketForAType(identifier, fluid.getBucketItem());
                                 }
                             });
                         }
